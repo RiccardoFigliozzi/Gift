@@ -1,0 +1,293 @@
+/* --- Stili Generali --- */
+:root {
+    --primary-color: #c33434;
+    /* Un viola delicato (SlateBlue) */
+    --secondary-color: #db7171;
+    /* Un rosa acceso (HotPink) */
+    --background-color: #fdfaff;
+    /* Sfondo quasi bianco con una punta di viola */
+    --text-color: #333;
+    --timeline-line-color: #e0ddeb;
+    --my-message-bg: #fae6e6;
+    /* Lavanda per i tuoi messaggi */
+    --her-message-bg: #ffffff;
+}
+
+body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 20px 15px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Header --- */
+header {
+    text-align: center;
+    margin-bottom: 60px;
+    padding: 20px 0;
+}
+
+header h1 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 3.5em;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+header p {
+    font-size: 1.2em;
+    color: var(--secondary-color);
+    margin-top: 10px;
+}
+
+/* --- Struttura della Timeline --- */
+#timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* La linea verticale centrale */
+#timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background-color: var(--timeline-line-color);
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    border-radius: 2px;
+}
+
+/* Contenitore per ogni punto della timeline */
+.milestone {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+/* Posizionamento alternato */
+.milestone.left {
+    left: 0;
+}
+
+.milestone.right {
+    left: 50%;
+}
+
+.milestone::after {
+    content: '♥';
+    position: absolute;
+    font-family: sans-serif;
+    /* Usa un font generico per la massima compatibilità del glifo */
+    font-size: 28px;
+    /* Dimensione del cuore */
+    color: var(--secondary-color);
+    top: 31px;
+    /* Posizionamento verticale per centrarlo */
+    z-index: 1;
+    transition: transform 0.3s ease;
+    /* Crea un "bordo" bianco per far risaltare il cuore dalla linea */
+    -webkit-text-stroke: 2.5px white;
+    paint-order: stroke fill;
+    /* Assicura che il bordo sia disegnato sotto il colore */
+}
+
+.milestone.left::after {
+    right: -14px;
+}
+
+.milestone.right::after {
+    left: -14px;
+}
+
+.milestone:hover::after {
+    transform: scale(1.2);
+}
+
+/* Il contenuto del punto della timeline */
+.milestone-content {
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    position: relative;
+}
+
+.milestone-content:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(106, 90, 205, 0.15);
+}
+
+.milestone-content h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.5em;
+}
+
+.milestone-date {
+    font-weight: 500;
+    font-size: 0.9em;
+    color: var(--secondary-color);
+}
+
+/* --- Modale (Pop-up della Chat) --- */
+.modal {
+    display: none;
+    /* Nascosto di default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.5s;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 25px 30px;
+    border: 1px solid #888;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    animation: slideIn 0.5s;
+}
+
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+#modal-title {
+    color: var(--primary-color);
+    margin-top: 0;
+}
+
+#modal-chat-content {
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 50vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+/* --- Bolle dei Messaggi --- */
+.message-bubble {
+    padding: 10px 15px;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    max-width: 80%;
+    word-wrap: break-word;
+    line-height: 1.4;
+}
+
+.message-bubble.Desi.HipHop {
+    background-color: var(--my-message-bg);
+    border-bottom-right-radius: 4px;
+    align-self: flex-end;
+}
+
+.message-bubble.Riccardo {
+    background-color: var(--her-message-bg);
+    border: 1px solid #eee;
+    border-bottom-left-radius: 4px;
+    align-self: flex-start;
+}
+
+.chat-media {
+    max-width: 100%;
+    border-radius: 10px;
+    display: block;
+}
+
+.media-bubble {
+    padding: 5px;
+}
+
+.media-bubble video,
+.media-bubble img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* --- Animazioni --- */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* --- Responsive Design --- */
+@media screen and (max-width: 600px) {
+    header h1 {
+        font-size: 2.5em;
+    }
+
+    #timeline-container::after {
+        left: 31px;
+    }
+
+    .milestone {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    .milestone.left,
+    .milestone.right {
+        left: 0;
+    }
+
+    .milestone.left::after,
+    .milestone.right::after {
+        left: 20px;
+        right: auto;
+    }
+
+    .modal-content {
+        width: 75%;
+        margin: 20% auto;
+    }
+}
