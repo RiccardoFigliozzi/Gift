@@ -213,6 +213,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 { type: "image", author: "Riccardo", url: "assets/milano.jpeg" },
             ]
         },
+        {
+            id: 18,
+            date: "6 Agosto 2025",
+            title: "1 anno",
+            side: "right",
+            chatSnippet: [
+                { type: "image", author: "Riccardo", url: "assets/anno.jpeg" },
+            ]
+        },
 
 
     ];
